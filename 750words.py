@@ -55,7 +55,7 @@ def set_timer(prompt, timeout):
 
     # if user ctrl-c or ctrl-d, stop.
     except KeyboardInterrupt:
-        print "Premature ending :( "
+        print "End!"
 
     timer.cancel()
     return user_input
@@ -68,7 +68,7 @@ def save_with_time(filename, timestamp="%Y-%m-%d-%H-%M-%S_{filename}"):
 
 # figure out how to prevent Enter from stopping
 time = ask_for_time()
-response = set_timer("Start writing! :  \n", time)
+response = set_timer("What are your thoughts today?  \n", time)
 
 # save words written into the file
 with open("my750/" + save_with_time('750words.txt'), 'w') as my750:
