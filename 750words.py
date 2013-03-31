@@ -1,4 +1,5 @@
 # 750 words in the terminal
+
 import thread
 import threading
 
@@ -12,9 +13,11 @@ def ask_for_time():
     if time == '':
         time = 45.0000
 
-    print "    " +  str(time) + "45 seconds set.    "
+    print time,
+    print " seconds set! "
+    print "\n"
 
-    return time
+    return int(time)
 
 
 # start the timer
@@ -26,11 +29,22 @@ def set_timer(prompt, timeout=45.0):
 
     try: 
         timer.start()
-        user_input = raw_input(prompt)
+
+        user_input = ""
+
+        print prompt
+
+        # ignore newlines, keep concatenating
+        while True:
+            user_input += "\n"   # add new line first to keep spacing
+            user_input += raw_input()
+
     except KeyboardInterrupt:
         pass
+
     timer.cancel()
     return user_input
+
 
 # appends given filename with timestamp
 def save_with_time(filename, timestamp="%Y-%m-%d-%H-%M-%S_{filename}"):
