@@ -1,5 +1,6 @@
 # 750 words in the terminal
 
+# timer threadign
 import thread
 import threading
 
@@ -7,6 +8,8 @@ import datetime
 
 # setup the timer
 def ask_for_time():
+
+    # loop until a valid int input 
     while True:
         try:
             time = raw_input("how many seconds to write for? ") 
@@ -31,7 +34,8 @@ def ask_for_time():
 
 
 # start the timer
-def set_timer(prompt, timeout=45.0):
+def set_timer(prompt, timeout):
+    # set the timer
     timer = threading.Timer(timeout, thread.interrupt_main)
 
     # in case user ctrl+c's out
@@ -44,13 +48,14 @@ def set_timer(prompt, timeout=45.0):
 
         print prompt
 
-        # ignore newlines, keep concatenating
+        # loop if user presses return;, keep concatenating
         while True:
             user_input += "\n"   # add new line first to keep spacing
             user_input += raw_input()
 
+    # if user ctrl-c or ctrl-d, stop.
     except KeyboardInterrupt:
-        pass
+        print "Premature ending :( "
 
     timer.cancel()
     return user_input
@@ -60,11 +65,12 @@ def set_timer(prompt, timeout=45.0):
 def save_with_time(filename, timestamp="%Y-%m-%d-%H-%M-%S_{filename}"):
     return datetime.datetime.now().strftime(timestamp).format(filename=filename)
 
+
 # figure out how to prevent Enter from stopping
 time = ask_for_time()
-response = set_timer("Start typing! :  \n", time)
+response = set_timer("Start writing! :  \n", time)
 
-# save my words
+# save words written into the file
 with open("my750/" + save_with_time('750words.txt'), 'w') as my750:
     my750.write(response)
 
