@@ -23,7 +23,6 @@ def ask_for_time():
             pass
 
 
-
     print time,
     print " seconds set! "
     print "\n"
