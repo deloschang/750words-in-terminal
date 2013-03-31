@@ -58,4 +58,6 @@ response = set_timer("Start typing! :  \n", time)
 with open("my750/" + save_with_time('750words.txt'), 'w') as my750:
     my750.write(response)
 
+print "Saved! You exercised your creativity today!"
+
 
