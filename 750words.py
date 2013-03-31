@@ -32,13 +32,16 @@ def set_timer(prompt, timeout=45.0):
     timer.cancel()
     return user_input
 
+# appends given filename with timestamp
+def save_with_time(filename, timestamp="%Y-%m-%d-%H-%M-%S_{filename}"):
+    return datetime.datetime.now().strftime(timestamp).format(filename=filename)
 
-
-
+# figure out how to prevent Enter from stopping
 time = ask_for_time()
 response = set_timer("Start typing! :  \n", time)
 
-# save the response
-print response
+# save my words
+with open("my750/" + save_with_time('750words.txt'), 'w') as my750:
+    my750.write(response)
 
 
