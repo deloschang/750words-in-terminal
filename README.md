@@ -5,5 +5,6 @@ command line.
 
 
 1. Launch 750words with python 750words.
-2. You have 45 seconds to write whatever you want. 
-3. Your words are saved!
+2. Enter how long you want to write for (default is 45 seconds if you
+   press enter)
+3. Your words are timestamped saved in "my750/" 
