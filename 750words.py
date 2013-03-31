@@ -7,16 +7,22 @@ import datetime
 
 # setup the timer
 def ask_for_time():
-    time = raw_input("how many seconds to write for? ") 
+    while True:
+        try:
+            time = raw_input("how many seconds to write for? ") 
 
-    # catch default response, which is 45 seconds
-    if time == '':
-        time = 45.0000
+            # catch default response, which is 45 seconds
+            if time == '':
+                time = 45.0000
 
-    while isinstance(time, str):
-        print "Please enter an integer (in seconds)"
-        time = raw_input("how long to write for? ") 
-        
+            time = int(time)
+
+            break;
+
+        except ValueError:
+            pass
+
+
 
     print time,
     print " seconds set! "
