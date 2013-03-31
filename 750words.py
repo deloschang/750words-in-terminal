@@ -7,11 +7,16 @@ import datetime
 
 # setup the timer
 def ask_for_time():
-    time = raw_input("how long to write for?") 
+    time = raw_input("how many seconds to write for? ") 
 
     # catch default response, which is 45 seconds
     if time == '':
         time = 45.0000
+
+    while isinstance(time, str):
+        print "Please enter an integer (in seconds)"
+        time = raw_input("how long to write for? ") 
+        
 
     print time,
     print " seconds set! "
@@ -58,6 +63,8 @@ response = set_timer("Start typing! :  \n", time)
 with open("my750/" + save_with_time('750words.txt'), 'w') as my750:
     my750.write(response)
 
-print "Saved! You exercised your creativity today!"
+
+print "\n"
+print "Time's up! We saved it for you. You exercised your creativity today!"
 
 
