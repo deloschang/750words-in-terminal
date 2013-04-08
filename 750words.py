@@ -6,13 +6,16 @@ import threading
 
 import datetime
 
+import os
+import subprocess as sub
+
 # setup the timer
 def ask_for_time():
 
     # loop until a valid int input 
     while True:
         try:
-            time = raw_input("how many seconds to write for? ") 
+            time = raw_input("How many seconds to write for? ") 
 
             # catch default response, which is 45 seconds
             if time == '':
@@ -50,8 +53,8 @@ def set_timer(prompt, timeout):
 
         # loop if user presses return;, keep concatenating
         while True:
-            user_input += "\n"   # add new line first to keep spacing
             user_input += raw_input()
+            user_input += "\n"   # add new line first to keep spacing
 
     # if user ctrl-c or ctrl-d, stop.
     except KeyboardInterrupt:
@@ -66,6 +69,14 @@ def save_with_time(filename, timestamp="%Y-%m-%d-%H-%M-%S_{filename}"):
     return datetime.datetime.now().strftime(timestamp).format(filename=filename)
 
 
+# interesting stats (# of pieces and word count)
+print "You've written " + str(len([name for name in os.listdir('my750/')])) + " times so far."
+print "Total words written: ",
+
+p = os.popen("find my750 -name '*.txt' | xargs cat | wc -w | awk {'print $1'}", "r")
+line = p.readline()
+print line
+
 # figure out how to prevent Enter from stopping
 time = ask_for_time()
 response = set_timer("What are your thoughts today?  \n", time)
@@ -77,5 +88,13 @@ with open("my750/" + save_with_time('750words.txt'), 'w') as my750:
 
 print "\n"
 print "Time's up! We saved it for you. You exercised your creativity today!"
+
+print "\n"
+print "Total words written: ",
+
+p = os.popen("find my750 -name '*.txt' | xargs cat | wc -w | awk {'print $1'}", "r")
+line = p.readline()
+print line
+
 
 
